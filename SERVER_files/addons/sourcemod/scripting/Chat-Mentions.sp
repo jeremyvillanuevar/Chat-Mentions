@@ -23,7 +23,6 @@
 #include <sourcemod>
 #include <regex>
 #include <chat-processor>
-#include <autoexecconfig>
 #include <sdktools>
 #include <clientprefs>
 
@@ -58,14 +57,14 @@ public void OnPluginStart()
 	RegConsoleCmd("sm_chatmentions", Command_ChatMentions, "Toggle sound when mentioned in chat");
 	RegConsoleCmd("sm_chatmentionssound", Command_ChatMentions, "Toggle sound when mentioned in chat");
 	
-	AutoExecConfig_SetFile("Chat-Mentions");
-	cvar_sMentionColor = AutoExecConfig_CreateConVar("sm_chatmentions_color", "{green}", "Color prefix to use for mentioned name in chat", FCVAR_NOTIFY);
-	cvar_bMentionSound = AutoExecConfig_CreateConVar("sm_chatmentions_sound_enabled", "1", "Enable/Disable sound for all clients", FCVAR_NOTIFY, true, 0.0, true, 1.0);
-	cvar_sMentionSound = AutoExecConfig_CreateConVar("sm_chatmentions_sound", "Chat-Mentions/mention.wav", "Color prefix to use for mentioned name in chat", FCVAR_NOTIFY);
-	cvar_bMentionShowAtSingle = AutoExecConfig_CreateConVar("sm_chatmentions_show_at_on_single_target", "0", "Show \"@\" sign before single player name mention", FCVAR_NOTIFY, true, 0.0, true, 1.0);
-	cvar_bMentionShowAtMultiple = AutoExecConfig_CreateConVar("sm_chatmentions_show_at_on_multiple_target", "1", "Show \"@\" sign before multiple targeting eg. @all, @t, @ct", FCVAR_NOTIFY, true, 0.0, true, 1.0);
-	AutoExecConfig_ExecuteFile();
-	AutoExecConfig_CleanFile();
+	AutoExecConfig(true,"Chat-Mentions");
+	cvar_sMentionColor = CreateConVar("sm_chatmentions_color", "{green}", "Color prefix to use for mentioned name in chat", FCVAR_NOTIFY);
+	cvar_bMentionSound = CreateConVar("sm_chatmentions_sound_enabled", "1", "Enable/Disable sound for all clients", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	cvar_sMentionSound = CreateConVar("sm_chatmentions_sound", "Chat-Mentions/mention.wav", "Color prefix to use for mentioned name in chat", FCVAR_NOTIFY);
+	cvar_bMentionShowAtSingle = CreateConVar("sm_chatmentions_show_at_on_single_target", "0", "Show \"@\" sign before single player name mention", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	cvar_bMentionShowAtMultiple = CreateConVar("sm_chatmentions_show_at_on_multiple_target", "1", "Show \"@\" sign before multiple targeting eg. @all, @t, @ct", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	//AutoExecConfig_ExecuteFile();
+	//AutoExecConfig_CleanFile();
 	
 	if (cvar_bMentionSound.BoolValue)
 	{
